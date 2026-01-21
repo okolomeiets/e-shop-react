@@ -26,7 +26,7 @@ export default function Navigation() {
             </NavigationMenuLink>
           </NavigationMenuTrigger>
           <NavigationMenuContent>
-            <ul className="w-96">
+            <ul className="w-50">
               {productCategories.data?.map((category) => (
                 <li key={category.slug}>
                   <NavigationMenuLink asChild>

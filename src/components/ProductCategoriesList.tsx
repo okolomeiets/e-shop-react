@@ -1,14 +1,14 @@
 import { useProductCategories } from '../queries/productCategoriesQuery';
 
 export default function ProductCategoriesList() {
-  const productCategories = useProductCategories();
+  const { data, isLoading, isError } = useProductCategories();
   return (
     <div>
       Categories:
-      {productCategories.isLoading && <p>Loading...</p>}
-      {productCategories.isError && <p>Error getting data</p>}
+      {isLoading && <p>Loading...</p>}
+      {isError && <p>Error getting data</p>}
       <ul>
-        {productCategories.data?.map((category) => (
+        {data?.map((category) => (
           <li key={category.slug}>{category.name}</li>
         ))}
       </ul>
