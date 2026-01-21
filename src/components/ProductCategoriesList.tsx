@@ -6,7 +6,7 @@ export default function ProductCategoriesList() {
     <div>Categories:
       {productCategories.isLoading && (<p>Loading...</p>)}
       {productCategories.isError && (<p>Error getting data</p>)}
-      <ul>{productCategories.data?.map((category) => <li key={category}>{category}</li>)}</ul>
+      <ul>{productCategories.data?.map((category) => <li key={category.slug}>{category.name}</li>)}</ul>
     </div>
   )
 }
