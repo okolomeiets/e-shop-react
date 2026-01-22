@@ -9,11 +9,13 @@ export default function CategoryPage() {
   return (
     <div>
       <h2>{category}</h2>
-      {isLoading && <p>Loading...</p>}
-      {isError && <p>Error getting data</p>}
-      {data?.products.map((product) => (
-        <ProductCard key={product.id} product={product} />
-      ))}
+      <div className="grid grid-cols-2 sm:grid-cols-3">
+        {isLoading && <p>Loading...</p>}
+        {isError && <p>Error getting data</p>}
+        {data?.products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,6 +1,7 @@
 import type { Product } from '../types/product';
-import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Link } from 'react-router-dom';
 
 import {
   Card,
@@ -9,6 +10,7 @@ import {
   CardTitle,
   CardFooter,
   CardAction,
+  CardContent,
 } from '@/components/ui/card';
 
 type ProductCardProps = {
@@ -18,7 +20,6 @@ type ProductCardProps = {
 export default function ProductCard({ product }: ProductCardProps) {
   return (
     <Card className="relative mx-auto w-full max-w-sm pt-0">
-      <div className="absolute inset-0 z-30" />
       <img
         src={product.thumbnail}
         alt={product.title}
@@ -29,10 +30,27 @@ export default function ProductCard({ product }: ProductCardProps) {
           {product.brand && <Badge variant="secondary">{product.brand}</Badge>}
         </CardAction>
         <CardTitle>{product.title}</CardTitle>
-        <CardDescription>{product.description}</CardDescription>
       </CardHeader>
+      <CardContent>
+        {product.discountPercentage ? (
+          <>
+            <span className="line-through">{product.price.toFixed(2)}$</span>
+            <span className="mx-2 text-red-500">
+              {Number(
+                product.price * (1 - product.discountPercentage / 100),
+              ).toFixed(2)}
+              $
+            </span>
+          </>
+        ) : (
+          <span>{product.price.toFixed(2)}$</span>
+        )}
+        <CardDescription>{product.description}</CardDescription>
+      </CardContent>
       <CardFooter>
-        <Button className="w-full">Read more</Button>
+        <Button className="w-full" asChild>
+          <Link to={`/products/${product.id}`}>Read more</Link>
+        </Button>
       </CardFooter>
     </Card>
   );
